@@ -31,7 +31,6 @@ jobs:
         run: |
           sshpass -p "$VM_PASS" ssh -o StrictHostKeyChecking=no $VM_USER@$VM_HOST << 'EOF'
             docker pull ghcr.io/hugoschreib/mlops-1-hs:latest
-            docker stop mlops1-hs || true
-            docker rm mlops1-hs || true
+            docker rm $(docker stop $(docker ps -a -q --filter ancestor=mlops1-hs --format="{{.ID}}")) || true
             docker run -d --name mlops1-hs -p 8787:8787 ghcr.io/hugoschreib/mlops-1-hs:latest
           EOF
