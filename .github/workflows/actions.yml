@@ -30,8 +30,8 @@ jobs:
           VM_PASS: ${{ secrets.VM_PASSWORD }}
         run: |
           sshpass -p "$VM_PASS" ssh -o StrictHostKeyChecking=no $VM_USER@$VM_HOST << 'EOF'
-            docker pull ghcr.io/${GITHUB_REPOSITORY_OWNER}/mlops-1-hs:latest
+            docker pull ghcr.io/hugoschreib/mlops-1-hs:latest
             docker stop mlops1-hs || true
             docker rm mlops1-hs || true
-            docker run -d --name mlops1-hs -p 8787:8787 ghcr.io/${GITHUB_REPOSITORY_OWNER}/mlops-1-hs:latest
+            docker run -d --name mlops1-hs -p 8787:8787 ghcr.io/hugoschreib/mlops-1-hs:latest
           EOF
