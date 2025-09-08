@@ -1,7 +1,9 @@
 name: Build image
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - run: docker build . -t mlops-1-hs
